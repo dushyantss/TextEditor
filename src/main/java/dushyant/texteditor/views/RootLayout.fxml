@@ -25,7 +25,6 @@
                         <MenuItem mnemonicParsing="false" onAction="#handleCut" text="Cut"/>
                         <MenuItem mnemonicParsing="false" onAction="#handleCopy" text="Copy"/>
                         <MenuItem mnemonicParsing="false" onAction="#handlePaste" text="Paste"/>
-                        <MenuItem mnemonicParsing="false" onAction="#handleDelete" text="Delete"/>
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Help">

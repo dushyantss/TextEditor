@@ -122,18 +122,17 @@ public class RootController {
 
     @FXML
     private void handleCut() {
+        editor.cut();
     }
 
     @FXML
     private void handleCopy() {
+        editor.copy();
     }
 
     @FXML
     private void handlePaste() {
-    }
-
-    @FXML
-    private void handleDelete() {
+        editor.paste();
     }
 
     //HelpMenu handlers

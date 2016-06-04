@@ -39,4 +39,15 @@ public class EditorController {
         area.replaceText(text);
     }
 
+    public void cut() {
+        area.cut();
+    }
+
+    public void copy() {
+        area.copy();
+    }
+
+    public void paste() {
+        area.paste();
+    }
 }
