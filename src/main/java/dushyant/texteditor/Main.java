@@ -4,6 +4,7 @@ package dushyant.texteditor;
  * on 04-06-2016.
  */
 
+import dushyant.texteditor.controllers.EditorController;
 import dushyant.texteditor.controllers.RootController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -30,6 +31,7 @@ Main extends Application {
         primaryStage.setTitle("Text Editor");
         primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("/resources/icons/AppIcon.png")));
         initStage();
+        addEditor();
     }
 
     /***
@@ -47,5 +49,18 @@ Main extends Application {
 
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
+    }
+
+    /***
+     * Method to set the Editor.
+     * Cannot use a fxml file as it cannot instantiate a StyledTextArea
+     */
+    private void addEditor() {
+        EditorController editor = new EditorController();
+        editor.setMain(this);
+
+        root.setCenter(editor.getArea());
+
+        rootController.setEditor(editor);
     }
 }

@@ -1,7 +1,6 @@
 package dushyant.texteditor.controllers;
 
 import dushyant.texteditor.Main;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
 /**
@@ -12,6 +11,12 @@ import javafx.fxml.FXML;
 public class RootController {
     private Main main;
 
+    private EditorController editor;
+
+    public void setEditor(EditorController editor) {
+        this.editor = editor;
+    }
+
     public void setMain(Main main) {
         this.main = main;
     }
@@ -20,48 +25,48 @@ public class RootController {
     //**********************************************************************//
 
     @FXML
-    private void handleNew(ActionEvent actionEvent) {
+    private void handleNew() {
     }
 
     @FXML
-    private void handleOpen(ActionEvent actionEvent) {
+    private void handleOpen() {
     }
 
     @FXML
-    private void handleSave(ActionEvent actionEvent) {
+    private void handleSave() {
     }
 
     @FXML
-    private void handleSaveAs(ActionEvent actionEvent) {
+    private void handleSaveAs() {
     }
 
     @FXML
-    private void handleExit(ActionEvent actionEvent) {
+    private void handleExit() {
     }
 
     //EditMenu handlers
     //**********************************************************************//
 
     @FXML
-    private void handleCut(ActionEvent actionEvent) {
+    private void handleCut() {
     }
 
     @FXML
-    private void handleCopy(ActionEvent actionEvent) {
+    private void handleCopy() {
     }
 
     @FXML
-    private void handlePaste(ActionEvent actionEvent) {
+    private void handlePaste() {
     }
 
     @FXML
-    private void handleDelete(ActionEvent actionEvent) {
+    private void handleDelete() {
     }
 
     //HelpMenu handlers
     //**********************************************************************//
 
     @FXML
-    private void handleAbout(ActionEvent actionEvent) {
+    private void handleAbout() {
     }
 }
