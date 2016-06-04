@@ -21,12 +21,17 @@ import java.util.prefs.Preferences;
 public class
 Main extends Application {
     private final static String FILE_PATH_KEY = "filePath";
+
     private Stage primaryStage;
     private BorderPane root;
     private RootController rootController;
 
     public static void main(String[] args) {
         launch(args);
+    }
+
+    public Stage getPrimaryStage() {
+        return primaryStage;
     }
 
     @Override
@@ -129,14 +134,13 @@ Main extends Application {
         if (file == null) {
             return null;
         }
-
         String fileData = null;
 
         try (FileReader reader = new FileReader(file)) {
             StringBuilder builder = new StringBuilder();
             int len = 0;
             char[] buffer = new char[65536];
-            while ((len = reader.read(buffer, 0, len)) > 0) {
+            while ((len = reader.read(buffer)) > 0) {
                 builder.append(buffer, 0, len);
             }
             fileData = builder.toString();

@@ -27,4 +27,16 @@ public class EditorController {
     public StyledTextArea<ParStyle, TextStyle> getArea() {
         return area;
     }
+
+    //Helper methods for the root Controller
+    //*****************************************************************//
+
+    public String getText() {
+        return area.getText();
+    }
+
+    public void setText(String text) {
+        area.replaceText(text);
+    }
+
 }
