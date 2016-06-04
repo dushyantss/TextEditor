@@ -36,7 +36,9 @@ public class EditorController {
     }
 
     public void setText(String text) {
-        area.replaceText(text);
+        if (text != null) {
+            area.replaceText(text);
+        }
     }
 
     public void cut() {

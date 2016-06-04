@@ -18,8 +18,6 @@ public class RootController {
 
     private EditorController editor;
 
-    private String initialData = "";
-
     public void setEditor(EditorController editor) {
         this.editor = editor;
     }
@@ -33,24 +31,13 @@ public class RootController {
 
     @FXML
     private void handleNew() {
-        //if data has changed then save the changed file
-        if (!initialData.equals(editor.getText())) {
-            handleSave();
-        }
-
         // delete all data, set initial data = "" and remove the filePath from the preferences
-        initialData = "";
-        editor.setText(initialData);
+        editor.setText("");
         main.setFilePath(null);
     }
 
     @FXML
     private void handleOpen() {
-        //if data has changed then save the changed file
-        if (!initialData.equals(editor.getText())) {
-            handleSave();
-        }
-
         //now open a file chooser  and get the selected file
         FileChooser chooser = new FileChooser();
         FileChooser.ExtensionFilter ext = new FileChooser.ExtensionFilter("TXT files", "*.txt");
@@ -65,10 +52,7 @@ public class RootController {
 
         if (file != null) {
             Task<String> task = main.getFileDataTask(file);
-            task.setOnSucceeded(event -> {
-                initialData = task.getValue();
-                editor.setText(initialData);
-            });
+            task.setOnSucceeded(event -> editor.setText(task.getValue()));
             new Thread(task).start();
             main.setFilePath(file);
         }
@@ -82,7 +66,6 @@ public class RootController {
             //set initialData equal to area text
             //no need to set file path as already present
             Task task = main.setFileDataTask(editor.getText(), file);
-            task.setOnSucceeded(event -> initialData = editor.getText());
             new Thread(task).start();
         } else {
             handleSaveAs();
@@ -102,18 +85,12 @@ public class RootController {
         //set initialData equal to area text
         //set filePath to the chosen file
         Task task = main.setFileDataTask(editor.getText(), file);
-        task.setOnSucceeded(event -> {
-            initialData = editor.getText();
-            main.setFilePath(file);
-        });
+        task.setOnSucceeded(event -> main.setFilePath(file));
         new Thread(task).start();
     }
 
     @FXML
     private void handleExit() {
-        if (!initialData.equals(editor.getText())) {
-            handleSave();
-        }
         System.exit(0);
     }
 

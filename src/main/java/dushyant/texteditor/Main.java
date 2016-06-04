@@ -71,6 +71,18 @@ Main extends Application {
         root.setCenter(new VirtualizedScrollPane<>(editor.getArea()));
 
         rootController.setEditor(editor);
+
+        //now that the work with views is done lets load the filData from the
+        //file in filePath if present
+        File file = getFilePath();
+        if (file != null) {
+            Task<String> task = getFileDataTask(file);
+            task.setOnSucceeded(event -> {
+                editor.setText(task.getValue());
+                setFilePath(file);
+            });
+            new Thread(task).start();
+        }
     }
 
     //File related helper methods
