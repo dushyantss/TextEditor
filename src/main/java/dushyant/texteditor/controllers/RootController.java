@@ -3,6 +3,7 @@ package dushyant.texteditor.controllers;
 import dushyant.texteditor.Main;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.stage.FileChooser;
 
 import java.io.File;
@@ -75,14 +76,45 @@ public class RootController {
 
     @FXML
     private void handleSave() {
+        File file = main.getFilePath();
+        if (file != null) {
+            //save data to file
+            //set initialData equal to area text
+            //no need to set file path as already present
+            Task task = main.setFileDataTask(editor.getText(), file);
+            task.setOnSucceeded(event -> initialData = editor.getText());
+            new Thread(task).start();
+        } else {
+            handleSaveAs();
+        }
     }
 
     @FXML
     private void handleSaveAs() {
+        //open File chooser to get file path
+        FileChooser chooser = new FileChooser();
+        FileChooser.ExtensionFilter ext = new FileChooser.ExtensionFilter("TXT files", "*.txt");
+        chooser.getExtensionFilters().add(ext);
+
+        File file = chooser.showSaveDialog(main.getPrimaryStage());
+
+        //save data to file
+        //set initialData equal to area text
+        //set filePath to the chosen file
+        Task task = main.setFileDataTask(editor.getText(), file);
+        task.setOnSucceeded(event -> {
+            initialData = editor.getText();
+            main.setFilePath(file);
+        });
+        new Thread(task).start();
     }
 
     @FXML
     private void handleExit() {
+        if (!initialData.equals(editor.getText())) {
+            handleSave();
+        }
+        System.exit(0);
     }
 
     //EditMenu handlers
@@ -109,5 +141,8 @@ public class RootController {
 
     @FXML
     private void handleAbout() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION, "This program was created by\n" +
+                "Dushyant Singh Shekhawat");
+        alert.show();
     }
 }
