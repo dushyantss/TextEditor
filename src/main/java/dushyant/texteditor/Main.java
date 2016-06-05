@@ -13,7 +13,6 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import org.fxmisc.flowless.VirtualizedScrollPane;
 
 import java.io.*;
 import java.util.prefs.Preferences;
@@ -66,9 +65,8 @@ Main extends Application {
      */
     private void addEditor() {
         EditorController editor = new EditorController();
-        editor.setMain(this);
 
-        root.setCenter(new VirtualizedScrollPane<>(editor.getArea()));
+        root.setCenter(editor.getNode());
 
         rootController.setEditor(editor);
 
